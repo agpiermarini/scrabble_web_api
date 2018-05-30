@@ -15,5 +15,12 @@ class Play < ApplicationRecord
   private
 
     def score_word
+      self.score = word.chars.map { | let | letter_scores[let.upcase] }.sum
     end
+
+    # def score_word
+    #   self.score = self.word.chars.reduce(0) do | sum, letter |
+    #     sum += letter_scores[letter.upcase]
+    #   end
+    # end
 end
