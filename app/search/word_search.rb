@@ -11,12 +11,12 @@ class WordSearch
       req.headers["app_key"] = ENV["app_key"]
     end
 
-    word_info = JSON.parse(response.body, symbolize_names: true)
 
     if response.status == 200
+      word_info = JSON.parse(response.body, symbolize_names: true)
       Word.new(return_word(word_info[:results][0]), return_inflection(word_info[:results][0]))
     else
-      nil
+      Word.new(word_input, nil)
     end
   end
 

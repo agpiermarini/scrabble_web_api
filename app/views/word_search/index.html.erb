@@ -1,1 +1,5 @@
-<h4> '<%= @word.id %>' is a valid word and its root form is '<%= @word.inflection%>'. </h4>
+<% if @word.inflection %>
+  <h4> '<%= @word.id %>' is a valid word and its root form is '<%= @word.inflection%>'. </h4>
+<% else %>
+  <h4> '<%= @word.id %>' is not a valid word. </h4>
+<% end %>
