@@ -1,5 +1,5 @@
 class WordSearchController < ApplicationController
   def index
-    @word_search = WordSearch.new(params[:word])
+    @word = WordSearch.new(params[:word]).word
   end
 end

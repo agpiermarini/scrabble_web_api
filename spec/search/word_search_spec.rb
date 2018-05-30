@@ -12,7 +12,7 @@ describe WordSearch do
         VCR.use_cassette('word-search-word') do
           expect(subject.word).to be_a Word
           expect(subject.word.id).to eq('foxes')
-          expect(subject.word.root).to eq('fox')
+          expect(subject.word.inflection).to eq('fox')
         end
       end
     end
