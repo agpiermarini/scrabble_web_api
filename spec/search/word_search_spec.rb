@@ -11,6 +11,8 @@ describe WordSearch do
       it 'returns a word object based on a search' do
         VCR.use_cassette('word-search-word') do
           expect(subject.word).to be_a Word
+          expect(subject.word.id).to eq('foxes')
+          expect(subject.word.root).to eq('fox')
         end
       end
     end

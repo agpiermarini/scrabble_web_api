@@ -12,8 +12,23 @@ class WordSearch
     end
 
     word_info = JSON.parse(response.body, symbolize_names: true)
+
+    if response.status == 200
+      Word.new(return_word(word_info[:results][0]), return_inflection(word_info[:results][0]))
+    else
+      nil
+    end
   end
+
 
   private
     attr_reader :word_input
+
+    def return_word(result)
+      result[:id]
+    end
+
+    def return_inflection(result)
+      result[:lexicalEntries][0][:inflectionOf][0][:id]
+    end
 end
