@@ -1,5 +1,5 @@
 class WordSearchController < ApplicationController
   def index
-    require 'pry'; binding.pry
+    @word_search = WordSearch.new(params[:word])
   end
 end
