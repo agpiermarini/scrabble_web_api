@@ -15,25 +15,18 @@ describe 'User' do
 
     info = JSON.parse(response.body, symbolize_names: true)
 
-    require 'pry'; binding.pry
+    expect(info).to be_a Hash
+    expect(info[:game_id]).to eq(game.id)
+    expect(info[:scores]).to be_an Array
+    expect(info[:scores].length).to eq(2)
 
-#       Background: This story assumes the base data from running `rake db:seed`
-#
-# When I send a GET request to "/api/v1/games/1" I receive a JSON response as follows:
-#
-# {
-#   "game_id":1,
-#   "scores": [
-#     {
-#       "user_id":1,
-#       "score":15
-#     },
-#     {
-#       "user_id":2,
-#       "score":16
-#     }
-#   ]
-# }
+    expect(info[:scores][0]).to be_a Hash
+    expect(info[:scores][0][:user_id]).to eq(1)
+    expect(info[:scores][0][:score]).to eq(8)
+
+    expect(info[:scores][1]).to be_a Hash
+    expect(info[:scores][1][:user_id]).to eq(2)
+    expect(info[:scores][1][:score]).to eq(8)
     end
   end
 end
