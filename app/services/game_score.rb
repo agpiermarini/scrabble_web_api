@@ -17,7 +17,6 @@ class GameScore
         }
       ]
     }
-
   end
 
   private
@@ -26,5 +25,4 @@ class GameScore
     def calculate_score(player)
       player.plays.sum(:score)
     end
-
 end
