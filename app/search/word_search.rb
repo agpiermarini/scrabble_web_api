@@ -4,8 +4,8 @@ class WordSearch
   end
 
   def word
-    if response.status == 200
-      word_info = JSON.parse(response.body, symbolize_names: true)
+    if oxford_service.status == 200
+      word_info = oxford_service.word_info
       Word.new(return_word(word_info[:results][0]), return_inflection(word_info[:results][0]))
     else
       Word.new(word_input, nil)
@@ -24,14 +24,7 @@ class WordSearch
       result[:lexicalEntries][0][:inflectionOf][0][:id]
     end
 
-    def connection
-      Faraday.new "https://od-api.oxforddictionaries.com/api/v1/inflections/en/#{word_input}"
-    end
-
-    def response
-      connection.get do | req |
-        req.headers["app_id"]  = ENV["app_id"]
-        req.headers["app_key"] = ENV["app_key"]
-      end
+    def oxford_service
+      @oxford_service ||= OxfordService.new(word_input)
     end
 end
