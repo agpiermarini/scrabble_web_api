@@ -1,5 +1,7 @@
 class Api::V1::Games::GamesController < ActionController::API
   def show
-    require 'pry'; binding.pry
+    game = Game.find(params[:id])
+    game_score = GameScore.new(game)
+    render json: game_score.score
   end
 end
