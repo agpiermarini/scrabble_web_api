@@ -17,9 +17,16 @@ describe OxfordService do
     end
 
     describe '#word_info' do
-      it 'returns hash with word information' do
+      it 'returns hash with word information if response status 200' do
         VCR.use_cassette('oxford-service-word-info') do
           expect(subject.word_info).to be_a Hash
+        end
+      end
+
+      it 'returns nil if invalid word' do
+        VCR.use_cassette('oxford-service-word-info-invalid') do
+          word_search = OxfordService.new("foxez")
+          expect(word_search.word_info).to be nil
         end
       end
     end

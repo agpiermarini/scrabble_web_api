@@ -8,7 +8,7 @@ class OxfordService
   end
 
   def word_info
-    JSON.parse(response.body, symbolize_names: true)
+    JSON.parse(response.body, symbolize_names: true) if status == 200
   end
 
   private
